@@ -1,0 +1,63 @@
+#pragma once
+// 단순 연결 리스트의 노드 구조를 구조체로 정의
+typedef struct PlayNode {
+	char data;
+	struct PlayNode* link;
+} playNode;
+
+// 리스트 시작을 나타내는 head 노드를 구조체로 정의
+typedef struct {
+	playNode* head;
+} playList_h;
+
+playList_h* createLinkedList_h(void);
+void freeLinkedList_h(playList_h* L);
+void printList(playList_h* L);
+void insertFirstNode(playList_h* L, char* x);
+
+#include <stdio.h>
+#include "InsertLinkedList.h"
+
+
+int main(void) 
+{
+	
+	playList_h* L;
+	L = createLinkedList_h();
+	printf("공백리스트 생성 \n");
+	printList(L);
+
+	
+
+	return 0;
+
+
+}
+
+
+
+
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <string.h>
+#include <malloc.h>
+#include "InsertLinkedList.h"
+
+
+    // 공백 연결 리스트를 생성하는 연산
+
+	playList_h* createLinkedList_h(void){
+		playList_h* L;
+		L = (playList_h*)malloc(sizeof(playList_h));
+		L-> head = NULL;
+		return L;
+	}
+	// 리스트 첫 번째 노드로 삽입하는 알고리즘
+	void insertFirstNode(playList_h *L, char *x) {
+		playNode* newNode; // 새노드 준비
+		newNode = (playNode*)malloc(sizeof(playNode)); // 새노드 준비
+		strcpy(newNode -> data, x); // 새 노드 데이터 필드에 X 저장
+		newNode -> link = L -> head; //새로운 노드가 맨앞 헤더를 바라보게함
+		L -> head = newNode; // 리스트가 새로운 노드를 바라보게함 즉 새로운 노드가 헤드가 됨
+
+	}
